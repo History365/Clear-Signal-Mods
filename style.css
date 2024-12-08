@@ -136,8 +136,10 @@ nav ul ul li {
     margin-bottom: 20px;
 }
 
+/* Reverting the download grid to show 3 items in a row */
 .downloads-grid {
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 items per row */
     gap: 20px;
 }
 
