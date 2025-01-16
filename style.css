@@ -22,13 +22,13 @@ body, h1, h2, h3, ul, li, a {
 /* Dark mode */
 .dark-mode {
     --bg-color: #1a1a1a;
-    --text-color: #e9e9e9;
+    --text-color: #c2c2c2;
     --nav-bg: #2d2d2d;
-    --nav-text: #ffffff;
+    --nav-text: #c2c2c2;
     --button-bg: #404040;
-    --button-text: #ffffff;
+    --button-text: #c2c2c2;
     --header-bg: #2d2d2d;
-    --link-color: #ffffff;
+    --link-color: #c2c2c2;
     --border-color: #404040;
 
 }body {
