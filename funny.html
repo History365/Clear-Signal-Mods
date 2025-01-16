@@ -1,0 +1,159 @@
+  <!DOCTYPE html>
+  <html>
+  <head>
+      <title>YOU'VE BEEN SUPER MEGA ULTRA PEANUTED!</title>
+      <style>
+          body {
+              background-color: #FFE4B5;
+              font-family: 'Comic Sans MS', cursive;
+              text-align: center;
+              animation: rainbow 1s infinite;
+              cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"><text y="16" font-size="16">🥜</text></svg>'), auto;
+              overflow-x: hidden;
+          }
+        
+          @keyframes rainbow {
+              0% {background-color: #FFE4B5;}
+              20% {background-color: #FFA07A;}
+              40% {background-color: #98FB98;}
+              60% {background-color: #87CEEB;}
+              80% {background-color: #DDA0DD;}
+              100% {background-color: #FFE4B5;}
+          }
+
+          .peanut {
+              width: 300px;
+              animation: crazyDance 0.8s infinite;
+              margin-top: 50px;
+              transition: transform 0.3s;
+              filter: drop-shadow(0 0 10px gold);
+          }
+
+          .peanut:hover {
+              transform: scale(1.5) rotate(720deg);
+              transition: all 0.5s ease-in-out;
+          }
+
+          @keyframes crazyDance {
+              0% { transform: rotate(0deg) scale(1) translateX(0); }
+              25% { transform: rotate(-15deg) scale(1.1) translateX(-50px); }
+              50% { transform: rotate(0deg) scale(1) translateX(0); }
+              75% { transform: rotate(15deg) scale(1.1) translateX(50px); }
+              100% { transform: rotate(0deg) scale(1) translateX(0); }
+          }
+
+          h1 {
+              font-size: 70px;
+              color: #8B4513;
+              text-shadow: 3px 3px 0px #FFD700, 6px 6px 0px #FF6B6B, 9px 9px 0px #98FB98;
+              animation: wobble 2s infinite;
+              letter-spacing: 2px;
+          }
+
+          @keyframes wobble {
+              0%, 100% { transform: skew(0deg) scale(1); }
+              25% { transform: skew(5deg) scale(1.1); }
+              75% { transform: skew(-5deg) scale(0.9); }
+          }
+
+          .credit {
+              position: fixed;
+              bottom: 10px;
+              right: 10px;
+              font-size: 24px;
+              color: #8B4513;
+              animation: spin 3s infinite;
+              background: rgba(255,255,255,0.3);
+              padding: 10px;
+              border-radius: 50%;
+              box-shadow: 0 0 20px rgba(255,215,0,0.5);
+          }
+
+          @keyframes spin {
+              0% { transform: rotate(0deg) scale(1); }
+              50% { transform: rotate(180deg) scale(1.2); }
+              100% { transform: rotate(360deg) scale(1); }
+          }
+
+          .bounce {
+              animation: superBounce 1s infinite;
+              position: relative;
+          }
+
+          @keyframes superBounce {
+              0%, 100% { transform: translateY(0) rotate(0deg) scale(1); }
+              50% { transform: translateY(-60px) rotate(360deg) scale(1.2); }
+          }
+
+          h2 {
+              font-size: 42px;
+              color: #FF6B6B;
+              text-shadow: 2px 2px 0px #FFD700, 4px 4px 0px #8B4513;
+              animation: pulse 1s infinite;
+              margin-top: 30px;
+          }
+
+          @keyframes pulse {
+              0% { transform: scale(1) rotate(0deg); }
+              50% { transform: scale(1.2) rotate(5deg); }
+              100% { transform: scale(1) rotate(0deg); }
+          }
+
+          .peanut-rain {
+              position: fixed;
+              font-size: 24px;
+              animation: fall linear infinite;
+              z-index: -1;
+          }
+
+          @keyframes fall {
+              0% { transform: translateY(-100vh); }
+              100% { transform: translateY(100vh); }
+          }
+      </style>
+  </head>
+  <body>
+      <img src="peanut.webp" class="peanut" alt="Dancing Peanut">
+      <h1 class="bounce">HAH! YOU'VE BEEN MEGA-ULTRA-PEANUTED! 🥜✨</h1>
+      <h2>Prepare for the ULTIMATE nutty experience! 🎉</h2>
+      <div class="credit">Requested by LP 🥜😎✨</div>
+    
+      <script>
+          document.querySelector('.peanut').addEventListener('click', function() {
+              alert('SUPER MEGA ULTRA PEANUT POWER ACTIVATED! 🥜✨');
+              document.body.style.animation = 'rainbow 0.3s infinite';
+              createPeanutRain();
+          });
+
+          function createPeanutRain() {
+              for(let i = 0; i < 50; i++) {
+                  const peanut = document.createElement('div');
+                  peanut.className = 'peanut-rain';
+                  peanut.style.left = Math.random() * 100 + 'vw';
+                  peanut.style.animationDuration = (Math.random() * 2 + 1) + 's';
+                  peanut.innerHTML = '🥜';
+                  document.body.appendChild(peanut);
+              }
+          }
+
+          setInterval(() => {
+              const emojis = ['🥜', '✨', '🎉', '💫', '⚡', '🌟', '💥', '🎪'];
+              const h2 = document.querySelector('h2');
+              h2.innerHTML += emojis[Math.floor(Math.random() * emojis.length)];
+          }, 800);
+
+          document.addEventListener('mousemove', (e) => {
+              const x = e.pageX;
+              const y = e.pageY;
+              const sparkle = document.createElement('div');
+              sparkle.innerHTML = '✨';
+              sparkle.style.position = 'absolute';
+              sparkle.style.left = x + 'px';
+              sparkle.style.top = y + 'px';
+              sparkle.style.animation = 'pulse 1s forwards';
+              document.body.appendChild(sparkle);
+              setTimeout(() => sparkle.remove(), 1000);
+          });
+      </script>
+  </body>
+  </html>
