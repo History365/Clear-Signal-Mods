@@ -4,16 +4,35 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Union Pacific SD70M Pack | Clear Signal Mods</title>
-    <link rel="stylesheet" href="style.css"> 
+    <link rel="stylesheet" href="style.css">
     <link rel="icon" href="photos/CSM Favcion.png" type="image/x-icon">
     <link rel="shortcut icon" href="photos/CSM Favcion.png" type="image/x-icon">
     <style>
-        a {
-            color: inherit;
-            text-decoration: none;
+        body {
+            transition: background-color 0.3s ease, color 0.3s ease;
         }
-        a:hover {
-            text-decoration: underline;
+        .logo img {
+            transition: opacity 0.3s ease;
+            width: 462px;
+            height: 79px;
+            object-fit: contain;
+        }
+        .logo img.dark-logo {
+            display: none;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+        body.dark-mode .logo img.light-logo {
+            display: none;
+        }
+        body.dark-mode .logo img.dark-logo {
+            display: block;
+        }
+        .logo {
+            position: relative;
+            width: 462px;
+            height: 79px;
         }
     </style>
 </head>
@@ -21,7 +40,8 @@
     <header>
         <div class="header-content">
             <div class="logo">
-                <img src="photos/CSM-Logo.png" alt="Clear Signal Mods Logo" width="462" height="79">
+                <img src="photos/CSM-Logo.png" alt="Clear Signal Mods Logo" class="light-logo">
+                <img src="photos/CSM-Logo(d).png" alt="Clear Signal Mods Logo" class="dark-logo">
             </div>
             <nav>
                 <ul>
@@ -38,6 +58,7 @@
                 </ul>
             </nav>
             <div class="patreon">
+                <button id="darkModeToggle" class="theme-button">Toggle Dark Mode</button>
                 <a href="https://www.youtube.com/@clearsignalmods9333" class="patreon-button">Support Us on YouTube</a>
             </div>
         </div>
@@ -69,13 +90,11 @@
                 </div>
                 <div class="requirements">
                     <h3>Requirements:</h3>
-                    <ul>
-                        <li><a href="https://store.steampowered.com/app/277731/Train_Simulator_Southern_Pacific_SD70M_Loco_AddOn/" target="_blank">Southern Pacific SD70M</a></li>
-                        <li><a href="https://store.steampowered.com/app/208300/Train_Simulator_Sherman_Hill_Route_AddOn/" target="_blank">and/or Sherman Hill</a></li>
-                        <li><a href="https://store.steampowered.com/app/325964/Train_Simulator_EMD_16N710G3BEC_Engine_Pack_AddOn/" target="_blank">SS EMD 16N-710G3B EP</a></li>
-                    </ul>
-                </div>
-                <div class="version-history">
+                    <ul class="requirements-list">
+                        <li><a href="https://store.steampowered.com/app/277731/Train_Simulator_Southern_Pacific_SD70M_Loco_AddOn/" target="_blank" style="color: inherit;">Southern Pacific SD70M</a></li>
+                        <li><a href="https://store.steampowered.com/app/208300/Train_Simulator_Sherman_Hill_Route_AddOn/" target="_blank" style="color: inherit;">and/or Sherman Hill</a></li>
+                        <li><a href="https://store.steampowered.com/app/325964/Train_Simulator_EMD_16N710G3BEC_Engine_Pack_AddOn/" target="_blank" style="color: inherit;">SS EMD 16N-710G3B EP</a></li>                    </ul>
+                </div>                <div class="version-history">
                     <h3>Version History:</h3>
                     <ul>
                         <li><strong>12/30/2023:</strong> Rerelease with new installation file.</li>
@@ -89,5 +108,32 @@
     </main>
 
     <script src="download-tracker.js"></script>
+    <script>
+        const darkModeToggle = document.getElementById('darkModeToggle');
+        const body = document.body;
+        
+        // Check for saved dark mode preference
+        if (localStorage.getItem('darkMode') === 'enabled') {
+            body.classList.add('dark-mode');
+            darkModeToggle.textContent = 'Toggle Light Mode';
+        }
+
+        // Toggle dark mode
+        darkModeToggle.addEventListener('click', () => {
+            body.classList.toggle('dark-mode');
+            if (body.classList.contains('dark-mode')) {
+                localStorage.setItem('darkMode', 'enabled');
+                darkModeToggle.textContent = 'Toggle Light Mode';
+            } else {
+                localStorage.setItem('darkMode', 'disabled');
+                darkModeToggle.textContent = 'Toggle Dark Mode';
+            }
+        });
+
+        // Apply dark mode on page load if enabled
+        if (body.classList.contains('dark-mode')) {
+            darkModeToggle.textContent = 'Toggle Light Mode';
+        }
+    </script>
 </body>
 </html>

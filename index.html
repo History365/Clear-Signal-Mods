@@ -11,8 +11,28 @@
         body {
             transition: background-color 0.3s ease, color 0.3s ease;
         }
-        .invertible {
-            transition: filter 0.3s ease;
+        .logo img {
+            transition: opacity 0.3s ease;
+            width: 462px;
+            height: 79px;
+            object-fit: contain;
+        }
+        .logo img.dark-logo {
+            display: none;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+        body.dark-mode .logo img.light-logo {
+            display: none;
+        }
+        body.dark-mode .logo img.dark-logo {
+            display: block;
+        }
+        .logo {
+            position: relative;
+            width: 462px;
+            height: 79px;
         }
     </style>
 </head>
@@ -20,7 +40,8 @@
     <header>
         <div class="header-content">
             <div class="logo">
-                <img src="photos/CSM-Logo.png" alt="Clear Signal Mods Logo" width="462" height="79" class="invertible">
+                <img src="photos/CSM-Logo.png" alt="Clear Signal Mods Logo" class="light-logo">
+                <img src="photos/CSM-Logo(d).png" alt="Clear Signal Mods Logo" class="dark-logo">
             </div>
             <nav>
                 <ul>
@@ -95,23 +116,14 @@
             if (body.classList.contains('dark-mode')) {
                 localStorage.setItem('darkMode', 'enabled');
                 darkModeToggle.textContent = 'Toggle Light Mode';
-                document.querySelectorAll('.invertible').forEach(img => {
-                    img.style.filter = 'invert(1) hue-rotate(180deg) saturate(200%)';
-                });
             } else {
                 localStorage.setItem('darkMode', 'disabled');
                 darkModeToggle.textContent = 'Toggle Dark Mode';
-                document.querySelectorAll('.invertible').forEach(img => {
-                    img.style.filter = 'none';
-                });
             }
         });
 
-        // Apply filters on page load if dark mode is enabled
+        // Apply dark mode on page load if enabled
         if (body.classList.contains('dark-mode')) {
-            document.querySelectorAll('.invertible').forEach(img => {
-                img.style.filter = 'invert(1) hue-rotate(180deg) saturate(200%)';
-            });
             darkModeToggle.textContent = 'Toggle Light Mode';
         }
     </script>
