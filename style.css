@@ -6,15 +6,41 @@ body, h1, h2, h3, ul, li, a {
     text-decoration: none;
 }
 
-body {
+:root {
+    --bg-color: #ffffff;
+    --text-color: #000000;
+    --nav-bg: #ffffff;
+    --nav-text: #000000;
+    --button-bg: #b1b1b1;
+    --button-text: #000000;
+    --header-bg: #ffffff;
+    --link-color: #000000;
+    --border-color: #ddd;
+    --photo-width: 50%;
+}
+
+/* Dark mode */
+.dark-mode {
+    --bg-color: #1a1a1a;
+    --text-color: #ffffff;
+    --nav-bg: #2d2d2d;
+    --nav-text: #ffffff;
+    --button-bg: #404040;
+    --button-text: #ffffff;
+    --header-bg: #2d2d2d;
+    --link-color: #ffffff;
+    --border-color: #404040;
+
+}body {
     font-family: Arial, sans-serif;
-    color: #000000; /* Set default text color to black */
-    background-color: #fff;
+    color: var(--text-color);
+    background-color: var(--bg-color);
+    transition: all 0.3s ease;
 }
 
 header {
-    background-color: #ffffff;
-    border-bottom: 1px solid #ddd;
+    background-color: var(--header-bg);
+    border-bottom: 1px solid var(--border-color);
     padding: 10px;
     position: relative;
 }
@@ -34,6 +60,7 @@ nav ul {
     display: flex;
     gap: 20px;
     position: relative;
+    background-color: var(--nav-bg);
 }
 
 nav li {
@@ -41,14 +68,14 @@ nav li {
 }
 
 nav a {
-    color: #000000; /* Black color for links */
+    color: var(--link-color);
     font-weight: bold;
     padding: 10px;
     display: block;
 }
 
 nav a[href$=".html"] {
-    color: #000; /* Black color specifically for HTML links */
+    color: var(--link-color);
 }
 
 nav ul ul {
@@ -56,8 +83,8 @@ nav ul ul {
     position: absolute;
     top: 100%;
     left: 0;
-    background-color: #fff;
-    border: 1px solid #ddd;
+    background-color: var(--nav-bg);
+    border: 1px solid var(--border-color);
     padding: 10px;
     z-index: 1000;
 }
@@ -85,7 +112,7 @@ nav ul ul li {
 
 .hero-image {
     position: relative;
-    height: 500px; /* Reduced height for better visibility */
+    height: 500px;
     overflow: hidden;
 }
 
@@ -94,29 +121,29 @@ nav ul ul li {
     height: auto;
     display: block;
     border-radius: 10px;
-    color: #ffffff;
 }
 
 .hero-overlay {
     position: absolute;
-    top: 70%; /* Adjusted to fit within the shorter image */
-    right: 20px; /* Positioned to the right side of the image */
-    color: #ffffff;
-    background: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+    top: 70%;
+    right: 20px;
+    color: var(--text-color);
+    background-color: var(--bg-color);
+    opacity: 0.9;
     padding: 30px;
     border-radius: 10px;
-    max-width: 700px; /* Limit width for better positioning */
-    text-align: right; /* Align text to the right */
+    max-width: 700px;
+    text-align: right;
 }
 
 .hero-overlay h1 {
-    font-size: 1.5em; /* Reduced font size for better fit */
+    font-size: 1.5em;
     margin-bottom: 10px;
 }
 
 .download-button {
-    background-color: #b1b1b1;
-    color: #000000;
+    background-color: var(--button-bg);
+    color: var(--button-text);
     padding: 10px 20px;
     border-radius: 5px;
     text-align: center;
@@ -124,7 +151,7 @@ nav ul ul li {
 }
 
 .download-button:hover {
-    background-color: #ffffff;
+    background-color: var(--nav-bg);
 }
 
 .new-downloads {
@@ -136,15 +163,15 @@ nav ul ul li {
     margin-bottom: 20px;
 }
 
-/* Reverting the download grid to show 3 items in a row */
 .downloads-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr); /* 3 items per row */
+    grid-template-columns: repeat(3, 1fr);
     gap: 20px;
 }
 
 .download-item {
     text-align: center;
+    border-color: var(--border-color);
 }
 
 .download-item img {
@@ -153,26 +180,21 @@ nav ul ul li {
     border-radius: 10px;
 }
 
-/* Add additional styling directly here */
-:root {
-    --photo-width: 50%; /* Adjust this value to change the size of the photo */
-}
-
 .product-details {
     padding: 20px;
-    background-color: #f9f9f9;
+    background-color: var(--bg-color);
     border-radius: 10px;
     margin: 20px 0;
     display: flex;
-    align-items: flex-start; /* Align items at the start to keep the text aligned */
+    align-items: flex-start;
     gap: 20px;
 }
 
 .product-details img {
-    border-radius: 10px; /* Rounded corners for the image */
-    width: var(--photo-width); /* Use the custom property to set the photo size */
+    border-radius: 10px;
+    width: var(--photo-width);
     height: auto;
-    max-width: 100%; /* Ensure the image does not become too large */
+    max-width: 100%;
 }
 
 .product-info {
@@ -210,7 +232,16 @@ nav ul ul li {
 .download-tracker {
     margin-top: 20px;
     padding: 10px;
-    background-color: #e9ecef;
+    background-color: var(--bg-color);
     border-radius: 5px;
     text-align: center;
+}
+
+.theme-button {
+    padding: 8px 16px;
+    border-radius: 4px;
+    border: none;
+    cursor: pointer;
+    background-color: var(--button-bg);
+    color: var(--button-text);
 }

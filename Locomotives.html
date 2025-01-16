@@ -7,29 +7,38 @@
     <link rel="stylesheet" href="style.css">
     <link rel="icon" href="photos/CSM Favcion.png" type="image/x-icon">
     <link rel="shortcut icon" href="photos/CSM Favcion.png" type="image/x-icon">
+    <style>
+        body {
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        .invertible {
+            transition: filter 0.3s ease;
+        }
+    </style>
 </head>
-<body style="color: black;">
+<body>
     <header>
         <div class="header-content">
             <div class="logo">
-                <img src="photos/CSM-Logo.png" alt="Clear Signal Mods Logo" width="462" height="79">
+                <img src="photos/CSM-Logo.png" alt="Clear Signal Mods Logo" width="462" height="79" class="invertible">
             </div>
             <nav>
                 <ul>
-                    <li><a href="index.html" style="color: black;">Home</a></li>
-                    <li><a href="freeware.html" style="color: black;">Freeware</a>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="freeware.html">Freeware</a>
                         <ul>
-                            <li><a href="locomotives.html" style="color: black;">Locomotives</a></li>
-                            <li><a href="rolling-stock.html" style="color: black;">Rolling Stock</a></li>
-                            <li><a href="legacy-repaints.html" style="color: black;">Legacy Repaints</a></li>
-                            <li><a href="sounds.html" style="color: black;">Sounds</a></li>
+                            <li><a href="locomotives.html">Locomotives</a></li>
+                            <li><a href="rolling-stock.html">Rolling Stock</a></li>
+                            <li><a href="legacy-repaints.html">Legacy Repaints</a></li>
+                            <li><a href="sounds.html">Sounds</a></li>
                         </ul>
                     </li>
-                    <li><a href="contact-us.html" style="color: black;">Contact Us</a></li>
+                    <li><a href="contact-us.html">Contact Us</a></li>
                 </ul>
             </nav>
             <div class="patreon">
-                <a href="https://www.youtube.com/@clearsignalmods9333" class="patreon-button" style="color: black;">Support Us on YouTube</a>
+                <button id="darkModeToggle" class="theme-button">Toggle Dark Mode</button>
+                <a href="https://www.youtube.com/@clearsignalmods9333" class="patreon-button">Support Us on YouTube</a>
             </div>
         </div>
     </header>
@@ -38,30 +47,68 @@
         <section class="new-downloads">
             <div class="downloads-grid">
                 <div class="download-item">
-                    <a href="upsd70m.html" style="color: black;">
+                    <a href="upsd70m.html" class="theme-link">
                         <img src="photos/upsd70-picture-1.jpg" alt="Union Pacific SD70M">
                         <h3>Union Pacific SD70M</h3>
                     </a>
                 </div>
                 <div class="download-item">
-                    <a href="upsd70ah.html" style="color: black;">
+                    <a href="upsd70ah.html" class="theme-link">
                         <img src="photos/upsd70ah-picture-1.jpg" alt="Union Pacific SD70AH">
                         <h3>Union Pacific SD70AH</h3>
                     </a>
                 </div>
                 <div class="download-item">
-                    <a href="nssd70ace.html" style="color: black;">
+                    <a href="nssd70ace.html" class="theme-link">
                         <img src="photos/ns-sd70ace-picture-1.jpg" alt="Norfolk Southern SD70ACe">
                         <h3>Norfolk Southern SD70ACe</h3>
                     </a>
                 </div>
                 <div class="download-item">
-                    <a href="spsd70m.html" style="color: black;">
+                    <a href="spsd70m.html" class="theme-link">
                         <img src="photos/spsd70m-picture-1.jpg" alt="Southern Pacific SD70M">
-                        <h3>Southern Pacific SD70M</h3>                    </a>
+                        <h3>Southern Pacific SD70M</h3>
+                    </a>
                 </div>
             </div>
         </section>
     </main>
+
+    <script>
+        const darkModeToggle = document.getElementById('darkModeToggle');
+        const body = document.body;
+        
+        // Check for saved dark mode preference
+        if (localStorage.getItem('darkMode') === 'enabled') {
+            body.classList.add('dark-mode');
+            darkModeToggle.textContent = 'Toggle Light Mode';
+        }
+
+        // Toggle dark mode
+        darkModeToggle.addEventListener('click', () => {
+            body.classList.toggle('dark-mode');
+            if (body.classList.contains('dark-mode')) {
+                localStorage.setItem('darkMode', 'enabled');
+                darkModeToggle.textContent = 'Toggle Light Mode';
+                document.querySelectorAll('.invertible').forEach(img => {
+                    img.style.filter = 'invert(1) hue-rotate(180deg) saturate(200%)';
+                });
+            } else {
+                localStorage.setItem('darkMode', 'disabled');
+                darkModeToggle.textContent = 'Toggle Dark Mode';
+                document.querySelectorAll('.invertible').forEach(img => {
+                    img.style.filter = 'none';
+                });
+            }
+        });
+
+        // Apply filters on page load if dark mode is enabled
+        if (body.classList.contains('dark-mode')) {
+            document.querySelectorAll('.invertible').forEach(img => {
+                img.style.filter = 'invert(1) hue-rotate(180deg) saturate(200%)';
+            });
+            darkModeToggle.textContent = 'Toggle Light Mode';
+        }
+    </script>
 </body>
 </html>
