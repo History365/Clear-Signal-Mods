@@ -34,6 +34,100 @@
             width: 462px;
             height: 79px;
         }
+        .sidebar {
+            width: 250px;
+            position: fixed;
+            left: 0;
+            top: 150px;
+            height: auto;
+            background-color: #f5f5f5;
+            padding: 20px;
+            border-right: 1px solid #ddd;
+            z-index: 100;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+        }
+        .sidebar h2 {
+            margin-bottom: 15px;
+            color: #333;
+            font-size: 1.2em;
+            margin-top: 20px;
+        }
+        .sidebar ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .sidebar ul li {
+            margin-bottom: 10px;
+        }
+        .sidebar ul li a {
+            text-decoration: none;
+            color: #000;
+            display: block;
+            padding: 10px 15px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+        .sidebar ul li a:hover {
+            background-color: #e0e0e0;
+            transform: translateX(5px);
+        }
+        body.dark-mode .sidebar {
+            background-color: #222;
+            border-right: 1px solid #444;
+        }
+        body.dark-mode .sidebar h2 {
+            color: #fff;
+        }
+        body.dark-mode .sidebar ul li a {
+            color: #fff;
+        }
+        body.dark-mode .sidebar ul li a:hover {
+            background-color: #444;
+        }
+        main {
+            margin-left: 270px;
+            padding: 20px;
+            margin-top: 150px;
+        }
+        a {
+            color: #000;
+            transition: color 0.3s ease;
+        }
+        body.dark-mode a {
+            color: #fff;
+        }
+        .theme-link {
+            color: #000;
+            transition: color 0.3s ease;
+        }
+        body.dark-mode .theme-link {
+            color: #fff;
+        }
+        nav ul li a {
+            color: #000;
+            transition: color 0.3s ease;
+        }
+        body.dark-mode nav ul li a {
+            color: #fff;
+        }
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background-color: white;
+            z-index: 1000;
+        }
+        body.dark-mode header {
+            background-color: #1a1a1a;
+        }
+        .content-section {
+            display: none;
+        }
+        .content-section.active {
+            display: block;
+        }
     </style>
 </head>
 <body>
@@ -46,12 +140,12 @@
             <nav>
                 <ul>
                     <li><a href="index.html">Home</a></li>
-                    <li><a href="freeware.html">Freeware</a>
+                    <li>
+                        <a href="freeware.html">Freeware</a>
                         <ul>
-                            <li><a href="locomotives.html">Locomotives</a></li>
-                            <li><a href="rolling-stock.html">Rolling Stock</a></li>
-                            <li><a href="legacy-repaints.html">Legacy Repaints</a></li>
-                            <li><a href="sounds.html">Sounds</a></li>
+                            <li><a href="#" onclick="showContent('locomotives')">Reskins & Enhancements</a></li>
+                            <li><a href="#rolling-stock" onclick="showContent('rolling-stock')">Rolling Stock</a></li>
+                            <li><a href="#" onclick="showContent('sounds')">Sounds</a></li>
                         </ul>
                     </li>
                     <li><a href="contact-us.html">Contact Us</a></li>
@@ -64,8 +158,16 @@
         </div>
     </header>
 
+    <div class="sidebar">
+        <h2>Categories</h2>
+        <ul>
+            <li><a href="#locomotives" onclick="showContent('locomotives')">Reskins & Enhancements</a></li>
+            <li><a href="#rolling-stock" onclick="showContent('rolling-stock')">Rolling Stock</a></li>
+            <li><a href="#sounds">Sounds</a></li>
+        </ul>    </div>
+
     <main>
-        <section class="new-downloads">
+        <section id="locomotives" class="content-section">
             <div class="downloads-grid">
                 <div class="download-item">
                     <a href="upsd70m.html" class="theme-link">
@@ -91,10 +193,88 @@
                         <h3>Southern Pacific SD70M</h3>
                     </a>
                 </div>
+                <div class="download-item">
+                    <a href="upsd9043mac.html" class="theme-link">
+                        <img src="photos/1a4a58_b0b0ae7fdc3b4084a14ae43f59f889d4~mv2.png" alt="UP SD9043MAC Repaints">
+                        <h3>UP SD9043MAC Repaints</h3>
+                        <p>Two more UP versions for the UP SD9043MAC DLC available on Steam.</p>
+                    </a>
+                </div>
+                <div class="download-item">
+                    <a href="mec7545.html" class="theme-link">
+                        <img src="photos/Screenshot 2025-02-02 011857.png" alt="MEC 7545">
+                        <h3>MEC 7545</h3>
+                        <p>MEC GE C40-8 7545 repaint.</p>
+                    </a>
+                </div>
+                <div class="download-item">
+                    <a href="mec7542.html" class="theme-link">
+                        <img src="photos/Screenshot 2025-02-02 012004.png" alt="MEC 7542">
+                        <h3>MEC 7542</h3>
+                        <p>MEC GE C40-8 7542 repaint. Represents scheme prior to Early 2020 repainting.</p>
+                    </a>
+                </div>
+                <div class="download-item">
+                    <a href="p42.html" class="theme-link">
+                        <img src="photos/1a4a58_6efa194dad844705a272dbfe13a63564~mv2.jpg" alt="P42 Light, horn enhancement">
+                        <h3>P42 Light, horn enhancement</h3>
+                        <p>By Jonasson Bacon + Repaint by Kittipos Montri Son</p>
+                    </a>
+                </div>
+                <div class="download-item">
+                    <a href="mecsd40-2.html" class="theme-link">
+                        <img src="photos/58b6ad_ce868e15dc3745d899222944c1f9bd76~mv2.jpg" alt="MEC SD40-2 V1">
+                        <h3>MEC SD40-2 V1</h3>
+                        <p>A Pan Am MEC Repaint for the Searchlight Simulations JR SD40-2 Conrail</p>
+                    </a>
+                </div>
+                <div class="download-item">
+                    <a href="upsd40-2.html" class="theme-link">
+                        <img src="photos/1a4a58_169503dfa9ce43f398faf2b703409aae~mv2.png" alt="UP We Will Deliver SD40-2">
+                        <h3>UP We Will Deliver SD40-2</h3>
+                        <p>Union Pacific "We will Deliver" SD40-2 Locomotive repaint.</p>
+                    </a>
+                </div>
             </div>
         </section>
+        <section id="rolling-stock" class="content-section">
+            <div class="downloads-grid">
+                <div class="download-item">
+                    <a href="csxgeometry.html" class="theme-link">
+                        <img src="photos/csxgeometry.jpg" alt="CSX Geometry Boxcar">
+                        <h3>CSX Geometry Boxcar</h3>
+                        <p>Repaint for the Searchlight Simulations JR FMC Box Car in the "Do Not Hump" wording! Cars 994370-994373</p>
+                    </a>
+                </div>
+                <div class="download-item">
+                    <a href="canpotex.html" class="theme-link">
+                        <img src="photos/canpotex.jpg" alt="Canpotex Hopper">
+                        <h3>Canpotex Hopper</h3>
+                        <p>Canpotex Hopper Repaint. Requires Canadian Mountain Passes.</p>
+                    </a>
+                </div>
+                <div class="download-item">
+                    <a href="bnautorack.html" class="theme-link">
+                        <img src="photos/bnautorack.jpg" alt="BN Autorack">
+                        <h3>BN Autorack</h3>
+                        <p>A repaint for the Donner Pass Autorack</p>
+                    </a>
+                </div>
+                <div class="download-item">
+                    <a href="dodxflatbeds.html" class="theme-link">
+                        <img src="photos/dodxflatbeds.jpg" alt="DODX Flat Beds">
+                        <h3>DODX Flat Beds</h3>
+                        <p>Department of Defense Flat Beds Red and Yellow for train sim, for the Flatbedpack01 pack.</p>
+                    </a>
+                </div>
+            </div>
+        </section>        <section id="sounds" class="content-section">
+            <!-- Add sounds content here -->
+        </section>
     </main>
-
+    <footer>
+        <p style="text-align: center; font-family: 'Arial', sans-serif">© 2019 - 2025 Clear Signal Mods. Any republication or distribution of the content hosted on this website is strictly prohibited.</p>
+    </footer>
     <script>
         const darkModeToggle = document.getElementById('darkModeToggle');
         const body = document.body;
@@ -111,25 +291,29 @@
             if (body.classList.contains('dark-mode')) {
                 localStorage.setItem('darkMode', 'enabled');
                 darkModeToggle.textContent = 'Toggle Light Mode';
-                document.querySelectorAll('.invertible').forEach(img => {
-                    img.style.filter = 'invert(1) hue-rotate(180deg) saturate(200%)';
-                });
             } else {
                 localStorage.setItem('darkMode', 'disabled');
                 darkModeToggle.textContent = 'Toggle Dark Mode';
-                document.querySelectorAll('.invertible').forEach(img => {
-                    img.style.filter = 'none';
-                });
             }
         });
 
-        // Apply filters on page load if dark mode is enabled
+        // Apply dark mode on page load if enabled
         if (body.classList.contains('dark-mode')) {
-            document.querySelectorAll('.invertible').forEach(img => {
-                img.style.filter = 'invert(1) hue-rotate(180deg) saturate(200%)';
-            });
             darkModeToggle.textContent = 'Toggle Light Mode';
         }
+
+        function showContent(sectionId) {
+            // Hide all sections
+            document.querySelectorAll('.content-section').forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // Show the selected section
+            document.getElementById(sectionId).classList.add('active');
+        }
+
+        // Show locomotives section by default
+        showContent('locomotives');
     </script>
 </body>
 </html>

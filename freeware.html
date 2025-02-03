@@ -3,32 +3,114 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Reskins | Clear Signal Mods</title>
-    <link rel="stylesheet" href="style.css"> <!-- Link to your CSS file -->  
+    <title>Home | Clear Signal Mods</title>
+    <link rel="stylesheet" href="style.css">
     <link rel="icon" href="photos/CSM Favcion.png" type="image/x-icon">
     <link rel="shortcut icon" href="photos/CSM Favcion.png" type="image/x-icon">
+    <style>
+        body {
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        .logo img {
+            transition: opacity 0.3s ease;
+            width: 462px;
+            height: 79px;
+            object-fit: contain;
+        }
+        .logo img.dark-logo {
+            display: none;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+        body.dark-mode .logo img.light-logo {
+            display: none;
+        }
+        body.dark-mode .logo img.dark-logo {
+            display: block;
+        }
+        .logo {
+            position: relative;
+            width: 462px;
+            height: 79px;
+        }
+        .theme-link {
+            color: var(--link-color);
+            text-decoration: none;
+        }
+        .theme-link h3 {
+            color: var(--link-color);
+        }
+        nav {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1000;
+        }
+        nav ul {
+            display: flex;
+            justify-content: center;
+            padding: 0;
+            margin: 0;
+            list-style: none;
+        }
+        nav ul li {
+            margin: 0 15px;
+            position: relative;
+        }
+        nav ul li ul {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #ffffff;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            z-index: 1000;
+            min-width: 200px;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+        body.dark-mode nav ul li ul {
+            background: #000000;
+        }
+        nav ul li:hover > ul {
+            display: block;
+        }
+        nav ul li ul li {
+            margin: 0;
+            width: 100%;
+        }
+        nav ul li ul li a {
+            white-space: nowrap;
+            padding: 10px 15px;
+            display: block;
+        }
+    </style>
 </head>
 <body>
     <header>
         <div class="header-content">
             <div class="logo">
-                <img src="photos/CSM-Logo.png" alt="Clear Signal Mods Logo" width="462" height="79">
+                <img src="photos/CSM-Logo.png" alt="Clear Signal Mods Logo" class="light-logo">
+                <img src="photos/CSM-Logo(d).png" alt="Clear Signal Mods Logo" class="dark-logo">
             </div>
             <nav>
                 <ul>
                     <li><a href="index.html">Home</a></li>
-                    <li><a href="freeware.html">Freeware</a>
+                    <li>
+                        <a href="freeware.html">Freeware</a>
                         <ul>
-                            <li><a href="locomotives.html">Locomotives</a></li>
+                            <li><a href="locomotives.html">Reskins & Enhancements</a></li>
                             <li><a href="rolling-stock.html">Rolling Stock</a></li>
                             <li><a href="legacy-repaints.html">Legacy Repaints</a></li>
-                            <li><a href="sounds.html">Sounds</a></li>
                         </ul>
                     </li>
                     <li><a href="contact-us.html">Contact Us</a></li>
                 </ul>
             </nav>
             <div class="patreon">
+                <button id="darkModeToggle" class="theme-button">Toggle Dark Mode</button>
                 <a href="https://www.youtube.com/@clearsignalmods9333" class="patreon-button">Support Us on YouTube</a>
             </div>
         </div>
@@ -57,6 +139,35 @@
                 </div>
             </div>
         </section>
-    </main>
-</body>
-</html>
+        <footer>
+            <p style="text-align: center; font-family: 'Arial', sans-serif">© 2019 - 2025 Clear Signal Mods. Any republication or distribution of the content hosted on this website is strictly prohibited.</p>
+        </footer>
+        <script>
+            const darkModeToggle = document.getElementById('darkModeToggle');
+            const body = document.body;
+            
+            // Check for saved dark mode preference
+            if (localStorage.getItem('darkMode') === 'enabled') {
+                body.classList.add('dark-mode');
+                darkModeToggle.textContent = 'Toggle Light Mode';
+            }
+    
+            // Toggle dark mode
+            darkModeToggle.addEventListener('click', () => {
+                body.classList.toggle('dark-mode');
+                if (body.classList.contains('dark-mode')) {
+                    localStorage.setItem('darkMode', 'enabled');
+                    darkModeToggle.textContent = 'Toggle Light Mode';
+                } else {
+                    localStorage.setItem('darkMode', 'disabled');
+                    darkModeToggle.textContent = 'Toggle Dark Mode';
+                }
+            });
+    
+            // Apply dark mode on page load if enabled
+            if (body.classList.contains('dark-mode')) {
+                darkModeToggle.textContent = 'Toggle Light Mode';
+            }
+        </script>
+    </body>
+    </html>

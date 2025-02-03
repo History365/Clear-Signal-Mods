@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home | Clear Signal Mods</title>
+    <title>Sounds | Clear Signal Mods</title>
     <link rel="stylesheet" href="style.css">
     <link rel="icon" href="photos/CSM Favcion.png" type="image/x-icon">
     <link rel="shortcut icon" href="photos/CSM Favcion.png" type="image/x-icon">
@@ -34,57 +34,83 @@
             width: 462px;
             height: 79px;
         }
-        .theme-link {
-            color: var(--link-color);
-            text-decoration: none;
+        .sidebar {
+            width: 250px;
+            position: fixed;
+            left: 0;
+            top: 0;
+            height: calc(100vh - 150px);
+            background-color: #f5f5f5;
+            padding: 20px;
+            border-right: 1px solid #ddd;
+            overflow-y: auto;
+            z-index: 100;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+            margin-top: 150px;
         }
-        .theme-link h3 {
-            color: var(--link-color);
+        .sidebar h2 {
+            margin-bottom: 15px;
+            color: #333;
+            font-size: 1.2em;
+            margin-top: 20px;
         }
-        nav {
-            position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 1000;
-        }
-        nav ul {
-            display: flex;
-            justify-content: center;
+        .sidebar ul {
+            list-style: none;
             padding: 0;
             margin: 0;
-            list-style: none;
         }
-        nav ul li {
-            margin: 0 15px;
-            position: relative;
+        .sidebar ul li {
+            margin-bottom: 10px;
         }
-        nav ul li ul {
-            display: none;
-            position: absolute;
-            top: 100%;
-            left: 50%;
-            transform: translateX(-50%);
-            background: #ffffff;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-            z-index: 1000;
-            min-width: 200px;
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-        }
-        body.dark-mode nav ul li ul {
-            background: #000000;
-        }
-        nav ul li:hover > ul {
+        .sidebar ul li a {
+            text-decoration: none;
+            color: #000;
             display: block;
-        }
-        nav ul li ul li {
-            margin: 0;
-            width: 100%;
-        }
-        nav ul li ul li a {
-            white-space: nowrap;
             padding: 10px 15px;
-            display: block;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+        .sidebar ul li a:hover {
+            background-color: #e0e0e0;
+            transform: translateX(5px);
+        }
+        body.dark-mode .sidebar {
+            background-color: #222;
+            border-right: 1px solid #444;
+        }
+        body.dark-mode .sidebar h2 {
+            color: #fff;
+        }
+        body.dark-mode .sidebar ul li a {
+            color: #fff;
+        }
+        body.dark-mode .sidebar ul li a:hover {
+            background-color: #444;
+        }
+        main {
+            margin-left: 270px;
+            padding: 20px;
+        }
+        a {
+            color: #000;
+            transition: color 0.3s ease;
+        }
+        body.dark-mode a {
+            color: #fff;
+        }
+        .theme-link {
+            color: #000;
+            transition: color 0.3s ease;
+        }
+        body.dark-mode .theme-link {
+            color: #fff;
+        }
+        nav ul li a {
+            color: #000;
+            transition: color 0.3s ease;
+        }
+        body.dark-mode nav ul li a {
+            color: #fff;
         }
     </style>
 </head>
@@ -102,8 +128,8 @@
                         <a href="freeware.html">Freeware</a>
                         <ul>
                             <li><a href="locomotives.html">Reskins & Enhancements</a></li>
-                            <li><a href="locomotives.html#rolling-stock" onclick="showContent('rolling-stock')">Rolling Stock</a></li>
-                            <li><a href="locomotives.html#">Sounds</a></li>
+                            <li><a href="rolling-stock.html">Rolling Stock</a></li>
+                            <li><a href="sounds.html">Sounds</a></li>
                         </ul>
                     </li>
                     <li><a href="contact-us.html">Contact Us</a></li>
@@ -116,41 +142,13 @@
         </div>
     </header>
 
-    <main>
-        <section class="hero">
-            <div class="hero-image">
-                <img src="photos/upsd70m-main-picture.jpg" alt="Union Pacific SD70M">
-            </div>
-            <div class="hero-overlay">
-                <h1>Union Pacific SD70M Pack</h1>
-                <a href="upsd70m.html" class="download-button">Download Now</a>
-            </div>
-        </section>
-
-        <section class="new-downloads">
-            <h2>New Downloads</h2>
-            <div class="downloads-grid">
-                <div class="download-item">
-                    <a href="spsd70m.html" class="theme-link">
-                        <img src="photos/spsd70m-main-picture.jpg" alt="Southern Pacific SD70M">
-                        <h3>Southern Pacific SD70M</h3>
-                    </a>
-                </div>
-                <div class="download-item">
-                    <a href="upsd70ah.html" class="theme-link">
-                        <img src="photos/upsd70ah-main-picture.jpg" alt="Union Pacific SD70AH">
-                        <h3>Union Pacific SD70AH</h3>
-                    </a>
-                </div>
-                <div class="download-item">
-                    <a href="ns-sd70ace.html" class="theme-link">
-                        <img src="photos/ns-sd70ace-main-picture.jpg" alt="Norfolk Southern SD70ACe">
-                        <h3>Norfolk Southern SD70ACe</h3>
-                    </a>
-                </div>
-            </div>
-        </section>
-    </main>
+    <div class="sidebar">
+        <h2>Categories</h2>
+        <ul>
+            <li><a href="locomotives.html">Reskins & Enhancements</a></li>
+            <li><a href="rolling-stock.html">Rolling Stock</a></li>
+            <li><a href="sounds.html">Sounds</a></li>        </ul>
+    </div>
 
     <footer>
         <p style="text-align: center; font-family: 'Arial', sans-serif">© 2019 - 2025 Clear Signal Mods. Any republication or distribution of the content hosted on this website is strictly prohibited.</p>

@@ -10,8 +10,21 @@
               animation: rainbow 1s infinite;
               cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"><text y="16" font-size="16">🥜</text></svg>'), auto;
               overflow-x: hidden;
+              perspective: 1000px;
           }
         
+          #bgVideo {
+              position: fixed;
+              right: 0;
+              bottom: 0;
+              min-width: 100%;
+              min-height: 100%;
+              width: auto;
+              height: auto;
+              z-index: -1;
+              filter: opacity(0.8);
+          }
+
           @keyframes rainbow {
               0% {background-color: #FFE4B5;}
               20% {background-color: #FFA07A;}
@@ -30,16 +43,17 @@
           }
 
           .peanut:hover {
-              transform: scale(1.5) rotate(720deg);
+              transform: scale(2) rotate(720deg);
               transition: all 0.5s ease-in-out;
+              filter: hue-rotate(360deg) brightness(1.5);
           }
 
           @keyframes crazyDance {
-              0% { transform: rotate(0deg) scale(1) translateX(0); }
-              25% { transform: rotate(-15deg) scale(1.1) translateX(-50px); }
-              50% { transform: rotate(0deg) scale(1) translateX(0); }
-              75% { transform: rotate(15deg) scale(1.1) translateX(50px); }
-              100% { transform: rotate(0deg) scale(1) translateX(0); }
+              0% { transform: rotate(0deg) scale(1) translateX(0) rotateY(0deg); }
+              25% { transform: rotate(-15deg) scale(1.1) translateX(-50px) rotateY(180deg); }
+              50% { transform: rotate(0deg) scale(1) translateX(0) rotateY(360deg); }
+              75% { transform: rotate(15deg) scale(1.1) translateX(50px) rotateY(540deg); }
+              100% { transform: rotate(0deg) scale(1) translateX(0) rotateY(720deg); }
           }
 
           h1 {
@@ -48,12 +62,13 @@
               text-shadow: 3px 3px 0px #FFD700, 6px 6px 0px #FF6B6B, 9px 9px 0px #98FB98;
               animation: wobble 2s infinite;
               letter-spacing: 2px;
+              filter: blur(0.5px);
           }
 
           @keyframes wobble {
-              0%, 100% { transform: skew(0deg) scale(1); }
-              25% { transform: skew(5deg) scale(1.1); }
-              75% { transform: skew(-5deg) scale(0.9); }
+              0%, 100% { transform: skew(0deg) scale(1) rotate(0deg); }
+              25% { transform: skew(5deg) scale(1.1) rotate(5deg); }
+              75% { transform: skew(-5deg) scale(0.9) rotate(-5deg); }
           }
 
           .credit {
@@ -70,9 +85,9 @@
           }
 
           @keyframes spin {
-              0% { transform: rotate(0deg) scale(1); }
-              50% { transform: rotate(180deg) scale(1.2); }
-              100% { transform: rotate(360deg) scale(1); }
+              0% { transform: rotate(0deg) scale(1) translateZ(0); }
+              50% { transform: rotate(180deg) scale(1.2) translateZ(100px); }
+              100% { transform: rotate(360deg) scale(1) translateZ(0); }
           }
 
           .bounce {
@@ -81,8 +96,8 @@
           }
 
           @keyframes superBounce {
-              0%, 100% { transform: translateY(0) rotate(0deg) scale(1); }
-              50% { transform: translateY(-60px) rotate(360deg) scale(1.2); }
+              0%, 100% { transform: translateY(0) rotate(0deg) scale(1) rotateX(0deg); }
+              50% { transform: translateY(-60px) rotate(360deg) scale(1.2) rotateX(360deg); }
           }
 
           h2 {
@@ -94,9 +109,9 @@
           }
 
           @keyframes pulse {
-              0% { transform: scale(1) rotate(0deg); }
-              50% { transform: scale(1.2) rotate(5deg); }
-              100% { transform: scale(1) rotate(0deg); }
+              0% { transform: scale(1) rotate(0deg) translateZ(0); }
+              50% { transform: scale(1.2) rotate(5deg) translateZ(50px); }
+              100% { transform: scale(1) rotate(0deg) translateZ(0); }
           }
 
           .peanut-rain {
@@ -107,26 +122,57 @@
           }
 
           @keyframes fall {
-              0% { transform: translateY(-100vh); }
-              100% { transform: translateY(100vh); }
+              0% { transform: translateY(-100vh) rotate(0deg); }
+              100% { transform: translateY(100vh) rotate(720deg); }
+          }
+
+          .disco-ball {
+              position: fixed;
+              top: 0;
+              left: 50%;
+              transform: translateX(-50%);
+              font-size: 50px;
+              animation: disco 2s infinite;
+          }
+
+          @keyframes disco {
+              0% { transform: translateX(-50%) rotate(0deg) scale(1); }
+              50% { transform: translateX(-50%) rotate(180deg) scale(1.5); }
+              100% { transform: translateX(-50%) rotate(360deg) scale(1); }
           }
       </style>
   </head>
   <body>
+      <div id="videoContainer">
+          <iframe id="bgVideo" 
+              src="https://www.youtube.com/embed/a9P_j1gMXBo?autoplay=1&controls=0&mute=0&loop=1&playlist=a9P_j1gMXBo&playbackRate=2"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen>
+          </iframe>
+      </div>
+      <div class="disco-ball">💎</div>
       <img src="peanut.webp" class="peanut" alt="Dancing Peanut">
       <h1 class="bounce">HAH! YOU'VE BEEN MEGA-ULTRA-PEANUTED! 🥜✨</h1>
       <h2>Prepare for the ULTIMATE nutty experience! 🎉</h2>
       <div class="credit">Requested by LP 🥜😎✨</div>
     
       <script>
+          // Set video speed to 200x
+          window.onload = function() {
+              const video = document.querySelector('#bgVideo');
+              video.contentWindow.postMessage('{"event":"command","func":"setPlaybackRate","args":[200]}', '*');
+          };
+
           document.querySelector('.peanut').addEventListener('click', function() {
               alert('SUPER MEGA ULTRA PEANUT POWER ACTIVATED! 🥜✨');
-              document.body.style.animation = 'rainbow 0.3s infinite';
+              document.body.style.animation = 'rainbow 0.1s infinite';
               createPeanutRain();
+              createChaos();
           });
 
           function createPeanutRain() {
-              for(let i = 0; i < 50; i++) {
+              for(let i = 0; i < 100; i++) {
                   const peanut = document.createElement('div');
                   peanut.className = 'peanut-rain';
                   peanut.style.left = Math.random() * 100 + 'vw';
@@ -136,23 +182,35 @@
               }
           }
 
+          function createChaos() {
+              document.body.style.transform = 'rotate(' + (Math.random() * 360) + 'deg)';
+              setTimeout(() => document.body.style.transform = '', 1000);
+          }
+
           setInterval(() => {
-              const emojis = ['🥜', '✨', '🎉', '💫', '⚡', '🌟', '💥', '🎪'];
+              const emojis = ['🥜', '✨', '🎉', '💫', '⚡', '🌟', '💥', '🎪', '🌈', '🎨', '🎭', '🎪'];
               const h2 = document.querySelector('h2');
               h2.innerHTML += emojis[Math.floor(Math.random() * emojis.length)];
-          }, 800);
+              h2.style.transform = `rotate(${Math.random() * 360}deg) scale(${Math.random() + 0.5})`;
+          }, 500);
 
           document.addEventListener('mousemove', (e) => {
               const x = e.pageX;
               const y = e.pageY;
               const sparkle = document.createElement('div');
-              sparkle.innerHTML = '✨';
+              const emojis = ['✨', '🌟', '💫', '⭐', '🌈'];
+              sparkle.innerHTML = emojis[Math.floor(Math.random() * emojis.length)];
               sparkle.style.position = 'absolute';
               sparkle.style.left = x + 'px';
               sparkle.style.top = y + 'px';
               sparkle.style.animation = 'pulse 1s forwards';
+              sparkle.style.transform = `rotate(${Math.random() * 360}deg)`;
               document.body.appendChild(sparkle);
-              setTimeout(() => sparkle.remove(), 1000);
+          });
+
+          document.addEventListener('keydown', () => {
+              document.body.style.filter = `hue-rotate(${Math.random() * 360}deg)`;
+              setTimeout(() => document.body.style.filter = '', 500);
           });
       </script>
   </body>

@@ -22,7 +22,7 @@ body, h1, h2, h3, ul, li, a {
 /* Dark mode */
 .dark-mode {
     --bg-color: #1a1a1a;
-    --text-color: #c2c2c2;
+    --text-color: #d4d4d4;
     --nav-bg: #2d2d2d;
     --nav-text: #c2c2c2;
     --button-bg: #404040;
